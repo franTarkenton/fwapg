@@ -89,10 +89,8 @@ clean_db:
 # check to see if a cached version in .data is the same, and if so then
 # don't re-download the data.
 data/FWA.gpkg:
-	if [ ! -f ./data/FWA.gpkg ]; then
-	    mkdir -p data
-	    wget -O - --trust-server-names -qN https://nrs.objectstore.gov.bc.ca/dzzrch/fwa.gpkg.gz | gunzip > ./data/FWA.gpkg
-	fi
+	mkdir -p data
+	wget -O - --trust-server-names -qN https://nrs.objectstore.gov.bc.ca/dzzrch/fwa.gpkg.gz | gunzip > ./data/FWA.gpkg
 
 # load basic/smaller tables from FWA.gpkg to whse_basemapping schema
 $(TABLES_SOURCE_TARGETS): .db data/FWA.gpkg
