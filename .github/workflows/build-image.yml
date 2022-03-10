@@ -1,10 +1,11 @@
 name: build-gdalutil-image
 
-# used on push for testing / development
-# on:
-#   push:
 
 on:
+  # used on push for testing / development
+
+  push:
+    branches: ['master', 'main']
   pull_request:
     # debug: remove the dev,putting build action on non existent branches for debug
     branches: ['master', 'main']
