@@ -26,6 +26,7 @@ jobs:
 
     name: 'build gdal util image'
     # The type of runner that the job will run on
+    # comment to trigger build
     runs-on: ubuntu-20.04
     env:
       DOCKER_BUILDKIT: 0
