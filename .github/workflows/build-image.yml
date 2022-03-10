@@ -4,7 +4,6 @@ name: build-gdalutil-image
 # on:
 #   push:
 
-
 on:
   pull_request:
     # debug: remove the dev,putting build action on non existent branches for debug

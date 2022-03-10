@@ -84,7 +84,6 @@ clean_db:
 	$(PSQL_CMD) -c "CREATE SCHEMA IF NOT EXISTS postgisftw"       # for fwapg featureserv functions
 	touch $@
 
-
 # get the latest FWA archive from hillcrestgeo.ca
 # should calculate an md5/sha1 when data is dumped to object store... then
 # check to see if a cached version in .data is the same, and if so then
