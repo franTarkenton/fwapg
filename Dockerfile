@@ -11,7 +11,12 @@ RUN apt-get -qq install -y --no-install-recommends postgresql-common \
 && apt-get -qq install -y --no-install-recommends yes \
 && apt-get -qq install -y --no-install-recommends gnupg \
 && yes '' | sh /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh \
-&& apt-get -qq install -y --no-install-recommends postgresql-client-14
+&& apt-get -qq install -y --no-install-recommends postgresql-client-14 \
+&&  apt-get -qq install -y --no-install-recommends python3-pip
+
+# install bcdata, its such a fat image already don't see point in
+# breaking up into two step build
+python3 -m pip install bcdata
 
 WORKDIR /home/fwapg
 COPY ["sql", "sql/"]

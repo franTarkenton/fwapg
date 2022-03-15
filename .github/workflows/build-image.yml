@@ -1,6 +1,5 @@
 name: build-gdalutil-image
 
-
 on:
   # used on push for testing / development
 
