@@ -30,8 +30,12 @@ TABLES_VALUEADDED = fwa_approx_borders \
 TABLES_SOURCE_TARGETS := $(addprefix .,$(TABLES_SOURCE))
 TABLES_VALUEADDED_TARGETS := $(addprefix .,$(TABLES_VALUEADDED))
 
+# takeing the fwa.gpkg out of the makefile
+# it should be handled externally because it takes so long to
+# download
+# data/FWA.gpkg
+
 ALL_TARGETS = .db \
-	data/FWA.gpkg \
 	$(TABLES_SOURCE_TARGETS) \
 	.fwa_stream_networks_sp \
 	.fwa_watersheds_poly \
