@@ -26,6 +26,7 @@ DROP TABLE IF EXISTS whse_basemapping.fwa_basins_poly;
 DROP TABLE IF EXISTS whse_basemapping.fwa_bcboundary;
 DROP TABLE IF EXISTS whse_basemapping.fwa_named_streams;
 DROP TABLE IF EXISTS whse_basemapping.fwa_waterbodies;
+DROP TABLE IF EXISTS whse_basemapping.fwa_stream_order_parent;
 
 -- additional data
 DROP TABLE IF EXISTS usgs.wdbhu12;
@@ -34,19 +35,18 @@ DROP TABLE IF EXISTS hydrosheds.hybas_lev12_v1c;
 -- functions 
 DROP FUNCTION IF EXISTS CDB_MakeHexagon;
 DROP FUNCTION IF EXISTS ST_Safe_Repair;
-DROP FUNCTION IF EXISTS ST_Safe_Difference;
 
 DROP FUNCTION IF EXISTS FWA_huc12;
 DROP FUNCTION IF EXISTS FWA_hydroshed;
 DROP FUNCTION IF EXISTS FWA_IndexPoint;
 
-DROP FUNCTION FWA_Upstream(ltree,ltree,ltree,ltree);
-DROP FUNCTION FWA_Upstream(integer,double precision,ltree,ltree,integer,double precision,ltree,ltree,boolean,double precision);
-DROP FUNCTION FWA_Upstream(integer,double precision,double precision,ltree,ltree,integer,double precision,ltree,ltree,boolean,double precision);
+DROP FUNCTION IF EXISTS FWA_Upstream(ltree,ltree,ltree,ltree);
+DROP FUNCTION IF EXISTS FWA_Upstream(integer,double precision,ltree,ltree,integer,double precision,ltree,ltree,boolean,double precision);
+DROP FUNCTION IF EXISTS FWA_Upstream(integer,double precision,double precision,ltree,ltree,integer,double precision,ltree,ltree,boolean,double precision);
 
-DROP FUNCTION FWA_Downstream(ltree,ltree,ltree,ltree);
-DROP FUNCTION FWA_Downstream(integer,double precision,ltree,ltree,integer,double precision,ltree,ltree,boolean,double precision);
-DROP FUNCTION FWA_Downstream(integer,double precision,double precision,ltree,ltree,integer,double precision,ltree,ltree,boolean,double precision);
+DROP FUNCTION IF EXISTS FWA_Downstream(ltree,ltree,ltree,ltree);
+DROP FUNCTION IF EXISTS FWA_Downstream(integer,double precision,ltree,ltree,integer,double precision,ltree,ltree,boolean,double precision);
+DROP FUNCTION IF EXISTS FWA_Downstream(integer,double precision,double precision,ltree,ltree,integer,double precision,ltree,ltree,boolean,double precision);
 
 DROP FUNCTION IF EXISTS FWA_UpstreamBorderCrossings;
 DROP FUNCTION IF EXISTS FWA_SliceWatershedAtPoint;
@@ -56,6 +56,3 @@ DROP FUNCTION IF EXISTS FWA_WatershedHex;
 DROP FUNCTION IF EXISTS FWA_WatershedStream;
 DROP FUNCTION IF EXISTS FWA_LocateAlong;
 DROP FUNCTION IF EXISTS FWA_LocateAlongInterval;
-
--- schema
-DROP SCHEMA postgisftw CASCADE;

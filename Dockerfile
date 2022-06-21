@@ -16,7 +16,6 @@ RUN apt-get -qq install -y --no-install-recommends postgresql-common \
 && apt-get -qq install -y --no-install-recommends git \
 && pip3 install --upgrade numpy \
 &&  pip3 install bcdata minio
-#RUN python3 -c "import numpy; print(numpy.__version__)"
 
 # install bcdata, its such a fat image already don't see point in
 # breaking up into two step build
