@@ -99,7 +99,7 @@ $(TABLES_SOURCE_TARGETS): .make/db data/fwa.gpkg
 		PG:$(DATABASE_URL_OGR)  \
 		-preserve_fid \
 		-dialect SQLITE \
-		-sql "SELECT * FROM $(subst .make/,,$@)" \
+		-sql "SELECT * FROM whse_basemapping$(subst .make/,.,$@)" \
 		data/fwa.gpkg
 	touch $@
 
