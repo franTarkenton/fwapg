@@ -72,4 +72,5 @@ data/fwa.gpkg:
 # load FWA functions
 .make/fwa_functions: 
 	$(PSQL_CMD) -f sql/functions/FWA_LocateAlong.sql
+	$(PSQL_CMD) -f sql/functions/FWA_Upstream.sql
 	touch $@
