@@ -65,12 +65,14 @@ data/fwa.gpkg:
 	touch $@
 
 # apply fixes
-.make/fwa_fixdata: .make/fwa_stream_networks_sp
+.make/fwa_fixdata:
 	$(PSQL_CMD) -f sql/fixes/data.sql
 	touch $@
 
 # load FWA functions
-.make/fwa_functions: 
+.make/fwa_functions:
+    $(PSQL_CMD) -f sql/functions/FWA_Downstream.sql
 	$(PSQL_CMD) -f sql/functions/FWA_LocateAlong.sql
 	$(PSQL_CMD) -f sql/functions/FWA_Upstream.sql
+	
 	touch $@
