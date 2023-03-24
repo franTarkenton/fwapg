@@ -1,7 +1,7 @@
 .PHONY: all clean_targets clean_db
 
-ALL_TARGETS = .make/db \
-	data/fwa.gpkg \
+ALL_TARGETS = data/fwa.gpkg \
+	.make/db \
 	.make/fwa_stream_networks_sp \
 	.make/fwa_fixdata \
 	.make/fwa_functions
@@ -20,6 +20,10 @@ all: $(ALL_TARGETS)
 clean_targets:
 	rm -Rf $(ALL_TARGETS)
 
+data/fwa.gpkg:
+	mkdir -p data
+	wget -S -N --trust-server-names https://nrs.objectstore.gov.bc.ca/dzzrch/fwa.gpkg.gz | gunzip > ./data/fwa.gpkg
+
 # clean out (drop) all loaded and derived tables and functions
 clean_db:
 	$(PSQL_CMD) -f sql/misc/drop_all.sql
@@ -37,10 +41,6 @@ clean_db:
 	$(PSQL_CMD) -c "CREATE SCHEMA IF NOT EXISTS postgisftw"	  # for fwapg featureserv functions
 	touch $@
 
-data/fwa.gpkg:
-	mkdir -p data
-	wget -O - --trust-server-names -qN https://nrs.objectstore.gov.bc.ca/dzzrch/fwa.gpkg.gz | gunzip > ./data/fwa.gpkg
-
 # streams: for faster load of large table:
 # - load to temp table
 # - add measure to geom when copying data to output table
@@ -56,8 +56,6 @@ data/fwa.gpkg:
 		-lco OVERWRITE=YES \
 		-dim XYZ \
 		-lco SPATIAL_INDEX=NONE \
-		-lco FID=LINEAR_FEATURE_ID \
-		-lco FID64=TRUE \
 		-preserve_fid \
 		data/fwa.gpkg \
 		FWA_STREAM_NETWORKS_SP
@@ -73,6 +71,5 @@ data/fwa.gpkg:
 .make/fwa_functions:
 	$(PSQL_CMD) -f sql/functions/FWA_Downstream.sql
 	$(PSQL_CMD) -f sql/functions/FWA_LocateAlong.sql
-	$(PSQL_CMD) -f sql/functions/FWA_Upstream.sql
-	
+	$(PSQL_CMD) -f sql/functions/FWA_Upstream.sql	
 	touch $@
