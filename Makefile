@@ -22,7 +22,7 @@ clean_targets:
 
 data/fwa.gpkg:
 	mkdir -p data
-	wget -S -N --trust-server-names https://nrs.objectstore.gov.bc.ca/dzzrch/fwa.gpkg.gz | gunzip > ./data/fwa.gpkg
+	wget -O - --trust-server-names -qN https://nrs.objectstore.gov.bc.ca/dzzrch/fwa.gpkg.gz | gunzip > ./data/fwa.gpkg
 
 # clean out (drop) all loaded and derived tables and functions
 clean_db:
