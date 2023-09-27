@@ -38,7 +38,7 @@ clean_db:
 	$(PSQL_CMD) -c "CREATE EXTENSION IF NOT EXISTS ltree"
 	$(PSQL_CMD) -c "CREATE EXTENSION IF NOT EXISTS intarray"
 	$(PSQL_CMD) -c "CREATE SCHEMA IF NOT EXISTS whse_basemapping"
-	$(PSQL_CMD) -c "CREATE SCHEMA IF NOT EXISTS WHSE_WATER_MANAGEMENT"
+	$(PSQL_CMD) -c "CREATE SCHEMA IF NOT EXISTS whse_water_management"
 	$(PSQL_CMD) -c "CREATE SCHEMA IF NOT EXISTS nr_water_notations"
 	$(PSQL_CMD) -c 'CREATE SCHEMA IF NOT EXISTS usgs'
 	$(PSQL_CMD) -c 'CREATE SCHEMA IF NOT EXISTS hydrosheds'
@@ -67,12 +67,13 @@ clean_db:
 	touch $@
 
 .make/gw_aquifers_classification_svw: .make/db data/fwa.gpkg
-	$(PSQL_CMD) -c "drop table if exists WHSE_WATER_MANAGEMENT.GW_AQUIFERS_CLASSIFICATION_SVW"
+	$(PSQL_CMD) -c "drop table if exists whse_water_management.GW_AQUIFERS_CLASSIFICATION_SVW"
 	ogr2ogr \
 		-f PostgreSQL \
 		PG:$(DATABASE_URL_OGR)  \
 		-nlt POLYGON \
-		-nln WHSE_WATER_MANAGEMENT.GW_AQUIFERS_CLASSIFICATION_SVW \
+		-nln GW_AQUIFERS_CLASSIFICATION_SVW \
+		-lco SCHEMA=whse_water_management
 		-lco GEOMETRY_NAME=geom \
 		-lco OVERWRITE=YES \
 		-dim XYZ \
