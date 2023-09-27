@@ -17,10 +17,6 @@ RUN apt-get -qq install -y --no-install-recommends postgresql-common \
 && apt-get -qq install -y --no-install-recommends git \
 && pip3 install --upgrade numpy
 
-# install bcdata, its such a fat image already don't see point in
-# breaking up into two step build
-RUN python3 -m pip install bcdata minio
-
 WORKDIR /home/fwapg
 COPY ["sql", "sql/"]
 COPY ["extras", "extras/"]
