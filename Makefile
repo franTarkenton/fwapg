@@ -3,6 +3,8 @@
 ALL_TARGETS = data/fwa.gpkg \
 	.make/db \
 	.make/fwa_stream_networks_sp \
+	.make/gw_aquifers_classification_svw \
+	.make/notations_src \
 	.make/fwa_fixdata \
 	.make/fwa_functions
 
@@ -60,6 +62,39 @@ clean_db:
 		data/fwa.gpkg \
 		FWA_STREAM_NETWORKS_SP
 	$(PSQL_CMD) -f sql/tables/source/fwa_stream_networks_sp.sql
+	touch $@
+
+.make/gw_aquifers_classification_svw: .make/db data/fwa.gpkg
+	$(PSQL_CMD) -c "drop table if exists whse_water_management.gw_aquifers_classification_svw"
+	ogr2ogr \
+		-f PostgreSQL \
+		PG:$(DATABASE_URL_OGR)  \
+		-nlt POLYGON \
+		-nln WHSE_WATER_MANAGEMENT.GW_AQUIFERS_CLASSIFICATION_SVW \
+		-lco GEOMETRY_NAME=geom \
+		-lco OVERWRITE=YES \
+		-dim XYZ \
+		-lco SPATIAL_INDEX=NONE \
+		-preserve_fid \
+		data/fwa.gpkg \
+		GW_AQUIFERS_CLASSIFICATION_SVW
+	touch $@
+
+.make/notations_src: .make/db data/fwa.gpkg
+	$(PSQL_CMD) -c "drop table if exists nr_water_notations.notations_src"
+	ogr2ogr \
+		-f PostgreSQL \
+		PG:$(DATABASE_URL_OGR)  \
+		-nlt POINT \
+		-nln notations_src \
+		-lco GEOMETRY_NAME=geom \
+		-lco OVERWRITE=YES \
+		-lco SCHEMA=nr_water_notations \
+		-dim XYZ \
+		-lco SPATIAL_INDEX=NONE \
+		-preserve_fid \
+		data/fwa.gpkg \
+		WLS_WATER_NOTATION_SV
 	touch $@
 
 # apply fixes
