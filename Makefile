@@ -54,7 +54,7 @@ clean_db:
 		-nln whse_water_management.GW_AQUIFERS_CLASSIFICATION_SVW \
 		-lco GEOMETRY_NAME=geom \
 		-lco OVERWRITE=YES \
-		-dim XYZ \
+		-dim XY \
 		-lco SPATIAL_INDEX=NONE \
 		-preserve_fid \
 		data/fwa.gpkg \
@@ -70,7 +70,7 @@ clean_db:
 		-nln nr_water_notations.notations_src \
 		-lco GEOMETRY_NAME=geom \
 		-lco OVERWRITE=YES \
-		-dim XYZ \
+		-dim XY \
 		-lco SPATIAL_INDEX=NONE \
 		-preserve_fid \
 		data/fwa.gpkg \
